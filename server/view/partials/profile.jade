@@ -1,0 +1,6 @@
+h1 Profile Page
+
+div(ng-controller='profileCtrl')
+   ul
+       li(ng-repeat='user in appuser')
+        span {{user.username}} , {{user.email}}

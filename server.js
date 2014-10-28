@@ -2,11 +2,13 @@ var express = require('express'),
     stylus = require('stylus'),
     logger = require('morgan'),
     bodyparser = require('body-parser'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    model = require('./public/models/usermodel.js'),
+    userModel = model(),
+    app = express();
+
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
-var	app = express();
 
 function compile(str, path){
     return stylus(str).set('filename',path);
@@ -41,10 +43,13 @@ Message.findOne().exec(function(err, messageDoc){
     mongoMessage = messageDoc.message;
 });
 
-
 app.get('/partials/:partialPath', function (req, res) {
     res.render('partials/' + req.params.partialPath);
-} );
+});
+
+app.get('/profile', function (req, res) {
+    res.render('partials/profile');
+});
 
 app.get('*', function(req, res){
     res.render('index', {
@@ -52,6 +57,6 @@ app.get('*', function(req, res){
     });
 });
 
-var port = 3000;
+var port = 3030;
 app.listen(port);
 console.log('Listening port: ' + port);
