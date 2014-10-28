@@ -1,2 +1,19 @@
-h1 This is a partial
-h2 {{ myVar }}
+
+div(ng-controller='mainCtrl')
+	h1 Welcome to the Taskstream Profiles!
+
+	div Search For TS Member: 
+		input(ng-model='search')
+
+	div
+		table(class="table table-striped")
+			thead
+				tr
+					th Name
+					th Department
+					th Email
+			tr(ng-repeat='user in users | filter:search')
+				td {{user.FirstName}} {{user.LastName}}
+				td {{user.Department}}
+				td {{user.Email}}
+				
