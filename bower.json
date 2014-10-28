@@ -1,0 +1,24 @@
+{
+  "name": "MEAN App",
+  "version": "0.0.0",
+  "authors": [
+    "Ishtiak Shah <ishah@taskstream.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "toastr": "~2.0.3",
+    "angular": "~1.3.0",
+    "angular-resource": "~1.3.0",
+    "angular-route": "~1.3.0",
+    "angular-ui-router": "~0.2.11"
+  }
+}

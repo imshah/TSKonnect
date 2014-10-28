@@ -1,0 +1,19 @@
+{
+  "name": "App",
+  "version": "0.0.1",
+  "description": "MEAN stack development test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ishtiak Shah",
+  "license": "ISC",
+  "dependencies": {
+    "express": "~4.10.0",
+    "jade": "~1.7.0",
+    "morgan": "~1.4.1",
+    "stylus": "~0.49.2",
+    "body-parser": "~1.9.1",
+    "mongoose": "~3.8.18"
+  }
+}

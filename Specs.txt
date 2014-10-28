@@ -1,0 +1,31 @@
+TSKonnect
+
+
+. Setup git (IS)
+
+. Setup MEAN stack (IS)
+
+. Mock a user data (IS)
+
+. hit url (IS)route
+	when index page - show list of person which is searchable
+	when page with user - take to profile page
+
+. Search Page - list of people and click to take you to the profile (CG)
+
+. (int the profile page)
+	load bubbles on the left side
+	basic info on the right (default) from DB (IS)
+
+. Edit Info (only on Profile) 
+	excluding username/name and email
+	double click to edit and on remove focus saves on DB
+
+. Bubble
+	one bubble with profile picture (JP)
+	on hover expand the outer circle (JP)
+	on click on any of the outer circles it replaces the profile view [XXX]
+
+
+
+
