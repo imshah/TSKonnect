@@ -19,6 +19,22 @@ app.config(function($routeProvider,$locationProvider){
         });*/
 });
 app.controller('mainCtrl', function($scope){
-        $scope.myVar = "You are awesome";
+        $scope.users = [
+        {'FirstName':'Clifton',
+         'LastName':'Guzman',
+          'Department':'SDET',
+          'Email':'cguzman@taskstream.com'},
+
+          {'FirstName':'Ishtiak',
+         'LastName':'Shah',
+          'Department':'SDET',
+          'Email':'Ishah@taskstream.com'},
+
+          {'FirstName':'Adam',
+         'LastName':'Phillips',
+          'Department':'DEVOPS',
+          'Email':'aphillips@taskstream.com'}
+        ];
+
     });
 
