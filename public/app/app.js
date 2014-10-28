@@ -18,9 +18,25 @@ app.config(function($routeProvider,$locationProvider){
         })
 
 });
-app.controller('mainCtrl', ['$scope',function($scope){
-        $scope.myVar = "You are not so awesome";
-}]);
+app.controller('mainCtrl', function($scope){
+        $scope.users = [
+        {'FirstName':'Clifton',
+         'LastName':'Guzman',
+          'Department':'SDET',
+          'Email':'cguzman@taskstream.com'},
+
+          {'FirstName':'Ishtiak',
+         'LastName':'Shah',
+          'Department':'SDET',
+          'Email':'Ishah@taskstream.com'},
+
+          {'FirstName':'Adam',
+         'LastName':'Phillips',
+          'Department':'DEVOPS',
+          'Email':'aphillips@taskstream.com'}
+        ];
+
+    });
 
 app.controller('profileCtrl', ['$scope', function($scope){
 

@@ -26,22 +26,22 @@ app.use(stylus.middleware(
 app.use(express.static(__dirname + '/public'));
 
 
-mongoose.connect("mongodb://localhost/test");
-var db = mongoose.connection;
-db.on('error', function callback(){
-    console.log('Connection error')
-});
-db.once('open', function callback(){
-    console.log('DB connection established...')
-});
+// mongoose.connect("mongodb://localhost/test");
+// var db = mongoose.connection;
+// db.on('error', function callback(){
+//     console.log('Connection error')
+// });
+// db.once('open', function callback(){
+//     console.log('DB connection established...')
+// });
 
-var messageSchema = mongoose.Schema({message:String});
-var Message = mongoose.model('Message', messageSchema);
-var mongoMessage;
+// var messageSchema = mongoose.Schema({message:String});
+// var Message = mongoose.model('Message', messageSchema);
+// var mongoMessage;
 
-Message.findOne().exec(function(err, messageDoc){
-    mongoMessage = messageDoc.message;
-});
+// Message.findOne().exec(function(err, messageDoc){
+//     mongoMessage = messageDoc.message;
+// });
 
 app.get('/partials/:partialPath', function (req, res) {
     res.render('partials/' + req.params.partialPath);
@@ -52,9 +52,10 @@ app.get('/profile', function (req, res) {
 });
 
 app.get('*', function(req, res){
-    res.render('index', {
-        mongoMessage: mongoMessage
-    });
+   // res.render('index', {
+   //     mongoMessage: mongoMessage
+    //});
+    res.render('index');
 });
 
 var port = 3030;
