@@ -4,7 +4,7 @@ var express = require('express'),
     bodyparser = require('body-parser'),
     mongoose = require('mongoose'),
     model = require('./public/models/usermodel.js'),
-    userModel = model(),
+    userModel = new model(),
     app = express();
 
 
@@ -26,14 +26,14 @@ app.use(stylus.middleware(
 app.use(express.static(__dirname + '/public'));
 
 
-// mongoose.connect("mongodb://localhost/test");
-// var db = mongoose.connection;
-// db.on('error', function callback(){
-//     console.log('Connection error')
-// });
-// db.once('open', function callback(){
-//     console.log('DB connection established...')
-// });
+ mongoose.connect("mongodb://localhost/test");
+ var db = mongoose.connection;
+ db.on('error', function callback(){
+     console.log('Connection error')
+ });
+ db.once('open', function callback(){
+     console.log('DB connection established...')
+ });
 
 // var messageSchema = mongoose.Schema({message:String});
 // var Message = mongoose.model('Message', messageSchema);
@@ -49,6 +49,30 @@ app.get('/partials/:partialPath', function (req, res) {
 
 app.get('/profile', function (req, res) {
     res.render('partials/profile');
+});
+
+app.get('/getAllUsers', function(req,res){
+    var allUser;
+    model.find().exec(function(err, callbackData){
+        if(!err){
+            allUser = callbackData;
+            console.log(callbackData);
+            res.send(allUser);
+        }
+    });
+});
+
+app.get('/getOneUser/:userid', function(req,res){
+
+    var username = req.params.username;
+    var theUser;
+
+    userModel.find({username:username}).exec(function(err, callbackData){
+        if(!err){
+            theUser = callbackData;
+            res.send(theUser);
+        }
+    });
 });
 
 app.get('*', function(req, res){
