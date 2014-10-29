@@ -3,39 +3,44 @@ h1 Profile Page
 div(class='list-group', ng-controller='profileCtrl')
 
 
-    a(href='#', class="list-group-item") {{appuser.username}}
-    a(href='#', class="list-group-item") user.email
-    a(href='#', class="list-group-item") user.phone
-    a(href='#', class="list-group-item") user.extension
 
-    div(ng-init="goBubbles=false;")
+
+
+    div
         table
             tr
                 td
                     div(class="repeat-animation", ng-show="goBubbles", style="clear:both;")
-                        img(class="bub",src="/images/Fb.jpg", alt="Facebook", ng-click="openNewURL('\\facebook')")
+                        img(class="bub",src="/images/Fb.jpg", alt="Facebook", ng-click="setvalue=1")
                 td
                     div(class="sample-show-hide" ng-show="goBubbles" style="clear:both;")
-                        img(class="bub", src="/images/Mail.png", alt="Mail Box")
+                        img(class="bub", src="/images/Mail.png", alt="Mail Box" ng-click="setvalue=2")
                 td
             tr
             tr
                 td
                     div(class="sample-show-hide", ng-show="goBubbles", style="clear:both;")
-                        img(class="bub", src="/images/Twitter.jpg", alt="Twitter")
+                        img(class="bub", src="/images/Twitter.jpg", alt="Twitter" ng-click="setvalue=3")
                 td
                     div(class="sample-show-hide" ,style="clear:both;")
-                        img(class="bub2" ng-src="/images/Profile.jpg", alt="Profile Pic", ng-mouseover="showBubbles()", ng-mouseout="showBubbles()" ,ng-click="isclicked = !isclicked")
+                        img(class="bub2" ng-src="/images/Profile.jpg", alt="Profile Pic", ng-mouseover="showBubbles()", ng-mouseout="showBubbles()" ,ng-click="isclicked = !isclicked; setvalue=0")
                 td
                     div(class="sample-show-hide", ng-show="goBubbles" ,style="clear:both;")
-                        img(class = "bub", src="/images/Search.png", alt="Search")
+                        img(class = "bub", src="/images/Search.png", alt="Search", ng-click="setvalue=4")
             tr
             tr
                 td
                 td
                     div(class="sample-show-hide" ,ng-show="goBubbles", style="clear:both;")
-                        img(class="bub", src="/images/gplus.jpg", alt="Google Plus")
+                        img(class="bub", src="/images/gplus.jpg", alt="Google Plus", ng-click="setvalue=5")
                 td
                     div(class="sample-show-hide", ng-show="goBubbles", style="clear:both;")
-                        img(class="bub", src="/images/Letter-P-Icon.png", alt="Google Plus")
+                        img(class="bub", src="/images/Letter-P-Icon.png", alt="Google Plus",ng-click="setvalue=6")
             tr
+    div(name=profileInfo ng-if="setvalue == 0")
+        a(href='#', class="list-group-item") {{user.username}}
+        a(href='#', class="list-group-item") user.email
+        a(href='#', class="list-group-item") user.phone
+        a(href='#', class="list-group-item") user.extension
+    div(name=facebook ng-if="setvalue == 1")
+        SOME FACEBOOK SHIT
