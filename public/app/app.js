@@ -12,104 +12,43 @@ app.config(function($routeProvider,$locationProvider){
             templateUrl:'/partials/main',
             controller: 'mainCtrl'
         }).
-        when('/user/:userid', {
+        when('/user/:username', {
             templateUrl: '/profile',
             controller: 'profileCtrl'
         })
 
 });
-app.controller('mainCtrl', function($scope){
-        $scope.users = [
-        {'FirstName':'Clifton',
-         'LastName':'Guzman',
-          'Department':'SDET',
-          'Email':'cguzman@taskstream.com'},
 
-          {'FirstName':'Ishtiak',
-         'LastName':'Shah',
-          'Department':'SDET',
-          'Email':'Ishah@taskstream.com'},
-
-          {'FirstName':'Adam',
-         'LastName':'Phillips',
-          'Department':'DEVOPS',
-          'Email':'aphillips@taskstream.com'}
-        ];
-
-    });
-
-app.controller('profileCtrl', ['$scope', function($scope){
-
-    //get the data from the database
-    var data = [
-        {
-            "username": "ishah",
-            "email": "ishah@taskstream.com",
-            "name": "Ishtiak Shah",
-            "title": "SDET",
-            "manager": "Anand Sharma",
-            "phone": "987-654-3210",
-            "extension": "361",
-            "imageFilePath": ""
-        },
-
-        {
-            "username": "cguzman",
-            "email": "cguzman@taskstream.com",
-            "name": "Clifton Guzman",
-            "title": "LEAD QA",
-            "manager": "Anand Sharma",
-            "phone": "987-654-3210",
-            "extension": "362",
-            "imageFilePath": ""
-        },
-
-        {
-            "username": "marthur",
-            "email": "marthur@taskstream.com",
-            "name": "Mona Arthur",
-            "title": "SDE",
-            "manager": "Anand Sharma",
-            "phone": "987-654-3210",
-            "extension": "363",
-            "imageFilePath": ""
-        },
+app.factory('currentUserService', function(){
+    return {message:"Data from service"}
+});
 
 
-        {
-           "username": "jdalton",
-           "email": "jdalton@taskstream.com",
-           "name": "Justin Dalton",
-           "title": "SDE",
-           "manager": "Anand Sharma",
-           "phone": "987-654-3210",
-           "extension": "364",
-           "imageFilePath": ""
-        },
+app.controller('mainCtrl', ['$scope','$http', '$window', 'currentUserService', function($scope, $http, $window, currentUserService){
 
-        {
-           "username": "jbollum",
-           "email": "jbollum@taskstream.com",
-           "name": "Joshi",
-           "title": "SDE",
-           "manager": "Anand Sharma",
-           "phone": "987-654-3210",
-           "extension": "365",
-           "imageFilePath": ""
-        },
+    $http.get('/getUser').
+        success(function (data, status, header, config) {
+            $scope.appuser = data;
+            //console.log(data);
+        });
 
-        {
-           "username": "sanwar",
-           "email": "sanwar@taskstream.com",
-           "name": "Sairah Anwar",
-           "title": "PO",
-           "manager": "Jeff",
-           "phone": "987-654-3210",
-           "extension": "366",
-           "imageFilePath": ""
-        }
-    ];
+    $scope.loadProfile = function (user) {
+        //console.log(user.username);
+        $scope.currentUser = currentUserService;
+        $window.location = "/user/" + user.username;
 
-    $scope.appuser = data;
+    }
+}]);
+
+app.controller('profileCtrl', ['$scope', '$http', 'currentUserService', function($scope, $http, currentUserService){
+
+    $scope.user = currentUserService;
+    console.log(user);
+    /*$http.get("/getUser/" + user.username).
+        success(function (data, status, header, config) {
+            $scope.appuser = data;
+
+            //console.log(data);
+    });*/
 
 }]);

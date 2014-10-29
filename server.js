@@ -3,10 +3,8 @@ var express = require('express'),
     logger = require('morgan'),
     bodyparser = require('body-parser'),
     mongoose = require('mongoose'),
-    model = require('./public/models/usermodel.js'),
-    userModel = model(),
+    model = require('./public/models/usermodel'),
     app = express();
-
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -26,22 +24,15 @@ app.use(stylus.middleware(
 app.use(express.static(__dirname + '/public'));
 
 
-// mongoose.connect("mongodb://localhost/test");
-// var db = mongoose.connection;
-// db.on('error', function callback(){
-//     console.log('Connection error')
-// });
-// db.once('open', function callback(){
-//     console.log('DB connection established...')
-// });
+ mongoose.connect("mongodb://localhost/test");
+ var db = mongoose.connection;
+ db.on('error', function callback(){
+     console.log('Connection error')
+ });
+ db.once('open', function callback(){
+     console.log('DB connection established...')
+ });
 
-// var messageSchema = mongoose.Schema({message:String});
-// var Message = mongoose.model('Message', messageSchema);
-// var mongoMessage;
-
-// Message.findOne().exec(function(err, messageDoc){
-//     mongoMessage = messageDoc.message;
-// });
 
 app.get('/partials/:partialPath', function (req, res) {
     res.render('partials/' + req.params.partialPath);
@@ -51,10 +42,28 @@ app.get('/profile', function (req, res) {
     res.render('partials/profile');
 });
 
+
+app.get('/getUser', function(req,res){
+
+    model.find({}, function(err, userModel){
+        if(!err){
+            res.send(userModel);
+        }
+    });
+});
+
+app.get('/getUser/:username', function(req,res){
+
+    var username = req.params.username;
+
+    model.find({username:username}).exec(function(err, callbackData){
+        if(!err){
+            res.send(callbackData);
+        }
+    });
+});
+
 app.get('*', function(req, res){
-   // res.render('index', {
-   //     mongoMessage: mongoMessage
-    //});
     res.render('index');
 });
 
