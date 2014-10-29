@@ -50,8 +50,11 @@ app.controller('mainCtrl', ['$scope','$http', 'currentUser',
 app.controller('profileCtrl', ['$scope', '$http', 'currentUser',
     function($scope, $http, currentUser){
 
+    $scope.setvalue=0;
+    $scope.goBubbles=false;
     var user = currentUser.data;
     //console.log(user.username);
+
 
         ///TBD: move this service
     $http.get("/getUser/" + user.username).
