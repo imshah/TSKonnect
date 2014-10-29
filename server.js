@@ -3,10 +3,8 @@ var express = require('express'),
     logger = require('morgan'),
     bodyparser = require('body-parser'),
     mongoose = require('mongoose'),
-    model = require('./public/models/usermodel.js'),
-    userModel = new model(),
+    model = require('./public/models/usermodel'),
     app = express();
-
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -35,13 +33,6 @@ app.use(express.static(__dirname + '/public'));
      console.log('DB connection established...')
  });
 
-// var messageSchema = mongoose.Schema({message:String});
-// var Message = mongoose.model('Message', messageSchema);
-// var mongoMessage;
-
-// Message.findOne().exec(function(err, messageDoc){
-//     mongoMessage = messageDoc.message;
-// });
 
 app.get('/partials/:partialPath', function (req, res) {
     res.render('partials/' + req.params.partialPath);
@@ -51,34 +42,29 @@ app.get('/profile', function (req, res) {
     res.render('partials/profile');
 });
 
-app.get('/getAllUsers', function(req,res){
-    var allUser;
-    model.find().exec(function(err, callbackData){
+
+app.get('/getUser', function(req,res){
+    //var m = new model({}).save();
+    model.find({}, function(err, userModel){
         if(!err){
-            allUser = callbackData;
-            console.log(callbackData);
-            res.send(allUser);
+            console.log(userModel);
+            res.send(userModel);
         }
     });
 });
 
-app.get('/getOneUser/:userid', function(req,res){
+app.get('/getUser/:username', function(req,res){
 
     var username = req.params.username;
-    var theUser;
 
-    userModel.find({username:username}).exec(function(err, callbackData){
+    model.find({username:username}).exec(function(err, callbackData){
         if(!err){
-            theUser = callbackData;
-            res.send(theUser);
+            res.send(callbackData);
         }
     });
 });
 
 app.get('*', function(req, res){
-   // res.render('index', {
-   //     mongoMessage: mongoMessage
-    //});
     res.render('index');
 });
 
