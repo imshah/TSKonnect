@@ -1,13 +1,14 @@
-var app = angular.module('myApp', ['ngResource', 'ui.router', 'ngRoute']);
+var app = angular.module('myApp', ['ngResource', 'ui.router']);
 
-app.config(function($routeProvider,$locationProvider){
+app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
 
     $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
     });
 
-    $routeProvider.
+    //$stateProvider.state()
+    /*$routeProvider.
         when('/', {
             templateUrl:'/partials/main',
             controller: 'mainCtrl'
@@ -15,40 +16,56 @@ app.config(function($routeProvider,$locationProvider){
         when('/user/:username', {
             templateUrl: '/profile',
             controller: 'profileCtrl'
+        })*/
+
+    $stateProvider
+        .state('index', {
+            url: '/',
+            templateUrl: '/partials/main'
         })
+        .state('profile', {
+            url: '/user/:username',
+            templateUrl: '/profile'
+
+        });
+
+    $urlRouterProvider.otherwise('/');
 
 });
 
-app.factory('currentUserService', function(){
-    return {message:"Data from service"}
-});
+app.value('currentUser', { data : {} });
 
 
-app.controller('mainCtrl', ['$scope','$http', '$window', 'currentUserService', function($scope, $http, $window, currentUserService){
+app.controller('mainCtrl', ['$scope','$http', 'currentUser',
+    function($scope, $http, currentUser){
 
+   //have to move this to service
     $http.get('/getUser').
         success(function (data, status, header, config) {
+
             $scope.appuser = data;
-            //console.log(data);
         });
 
     $scope.loadProfile = function (user) {
-        //console.log(user.username);
-        $scope.currentUser = currentUserService;
-        $window.location = "/user/" + user.username;
+
+        currentUser.data = user;
+        //$state.go('profile', {username:user.username});
 
     }
 }]);
 
-app.controller('profileCtrl', ['$scope', '$http', 'currentUserService', function($scope, $http, currentUserService){
+app.controller('profileCtrl', ['$scope', '$http', 'currentUser',
+    function($scope, $http, currentUser){
 
-    $scope.user = currentUserService;
-    console.log(user);
-    /*$http.get("/getUser/" + user.username).
+    var user = currentUser.data;
+
+    console.log(user.username);
+
+    $http.get("/getUser/" + user.username).
         success(function (data, status, header, config) {
             $scope.appuser = data;
 
             //console.log(data);
-    });*/
+    });
 
 }]);
