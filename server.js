@@ -44,7 +44,7 @@ app.get('/profile', function (req, res) {
 
 
 app.get('/getUser', function(req,res){
-    //var m = new model({}).save();
+
     model.find({}, function(err, userModel){
         if(!err){
             console.log(userModel);

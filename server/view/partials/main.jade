@@ -10,10 +10,10 @@ div(ng-controller='mainCtrl')
 			thead
 				tr
 					th Name
-					th Department
+					th Title
 					th Email
-			tr(ng-repeat='user in users | filter:search')
-				td {{user.FirstName}} {{user.LastName}}
-				td {{user.Department}}
-				td {{user.Email}}
+			tr(ng-repeat='user in appuser | filter:search')
+				td {{user.username}}
+				td {{user.title}}
+				td {{user.email}}
 				
