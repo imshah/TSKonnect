@@ -61,7 +61,7 @@ app.controller('profileCtrl', ['$scope', '$http', 'currentUser',
         success(function (data, status, header, config) {
             $scope.appuser = data;
 
-            //console.log(data);
+            console.log(data);
     });
 
 
