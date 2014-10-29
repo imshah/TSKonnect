@@ -1,7 +1,41 @@
 h1 Profile Page
 
-div(ng-controller='profileCtrl')
-   ul
-       li(ng-repeat='user in appuser')
-        span {{user.username}} , {{user.email}}
+div(class='list-group', ng-controller='profileCtrl')
 
+
+    a(href='#', class="list-group-item") {{appuser.username}}
+    a(href='#', class="list-group-item") user.email
+    a(href='#', class="list-group-item") user.phone
+    a(href='#', class="list-group-item") user.extension
+
+    div(ng-init="goBubbles=false;")
+        table
+            tr
+                td
+                    div(class="repeat-animation", ng-show="goBubbles", style="clear:both;")
+                        img(class="bub",src="/images/Fb.jpg", alt="Facebook", ng-click="openNewURL('\\facebook')")
+                td
+                    div(class="sample-show-hide" ng-show="goBubbles" style="clear:both;")
+                        img(class="bub", src="/images/Mail.png", alt="Mail Box")
+                td
+            tr
+            tr
+                td
+                    div(class="sample-show-hide", ng-show="goBubbles", style="clear:both;")
+                        img(class="bub", src="/images/Twitter.jpg", alt="Twitter")
+                td
+                    div(class="sample-show-hide" ,style="clear:both;")
+                        img(class="bub2" ng-src="/images/Profile.jpg", alt="Profile Pic", ng-mouseover="showBubbles()", ng-mouseout="showBubbles()" ,ng-click="isclicked = !isclicked")
+                td
+                    div(class="sample-show-hide", ng-show="goBubbles" ,style="clear:both;")
+                        img(class = "bub", src="/images/Search.png", alt="Search")
+            tr
+            tr
+                td
+                td
+                    div(class="sample-show-hide" ,ng-show="goBubbles", style="clear:both;")
+                        img(class="bub", src="/images/gplus.jpg", alt="Google Plus")
+                td
+                    div(class="sample-show-hide", ng-show="goBubbles", style="clear:both;")
+                        img(class="bub", src="/images/Letter-P-Icon.png", alt="Google Plus")
+            tr

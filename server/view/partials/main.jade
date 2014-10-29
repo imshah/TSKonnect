@@ -2,8 +2,8 @@
 div(ng-controller='mainCtrl')
 	h1 Welcome to the Taskstream Profiles!
 
-	div Search For TS Member: 
-		input(ng-model='search')
+	div Search:
+		input(ng-model='search', class="search-query")
 
 	div
 		table(class="table table-striped")
@@ -12,8 +12,9 @@ div(ng-controller='mainCtrl')
 					th Name
 					th Title
 					th Email
-			tr(ng-repeat='user in appuser | filter:search', ng-click='loadProfile(user)', ng-model="user.username")
+					th Phone
+			tr(ng-repeat='user in appuser | filter:search', ng-click='loadProfile(user)', ui-sref='profile({username:user.username})')
 				td {{user.username}}
 				td {{user.title}}
 				td {{user.email}}
-				
+				td {{user.phone}}
