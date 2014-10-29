@@ -47,7 +47,6 @@ app.get('/getUser', function(req,res){
 
     model.find({}, function(err, userModel){
         if(!err){
-            console.log(userModel);
             res.send(userModel);
         }
     });

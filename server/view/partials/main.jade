@@ -12,7 +12,7 @@ div(ng-controller='mainCtrl')
 					th Name
 					th Title
 					th Email
-			tr(ng-repeat='user in appuser | filter:search')
+			tr(ng-repeat='user in appuser | filter:search', ng-click='loadProfile(user)', ng-model="user.username")
 				td {{user.username}}
 				td {{user.title}}
 				td {{user.email}}
