@@ -3,39 +3,62 @@ h1 Profile Page
 div(class='list-group', ng-controller='profileCtrl')
 
 
-    a(href='#', class="list-group-item") {{appuser.username}}
-    a(href='#', class="list-group-item") user.email
-    a(href='#', class="list-group-item") user.phone
-    a(href='#', class="list-group-item") user.extension
 
-    div(ng-init="goBubbles=false;")
-        table
+
+
+    div
+        table(style="border:1")
             tr
                 td
                     div(class="repeat-animation", ng-show="goBubbles", style="clear:both;")
-                        img(class="bub",src="/images/Fb.jpg", alt="Facebook", ng-click="openNewURL('\\facebook')")
+                        img(class="bub",src="/images/Fb.jpg", alt="Facebook", ng-click="setvalue=1")
                 td
                     div(class="sample-show-hide" ng-show="goBubbles" style="clear:both;")
-                        img(class="bub", src="/images/Mail.png", alt="Mail Box")
+                        img(class="bub", src="/images/Mail.png", alt="Mail Box" ng-click="setvalue=2")
                 td
+                td(rowspan="3")
+                    div 
+                           div(style="width:300px ;height:100px")
+                            div(name=profileInfo ng-if="setvalue == 0")
+                                <strong>Name </strong>  <p>{{appuser[0].name}}</p>
+                                <strong>Email </strong>  <p> {{appuser[0].email}} </p>
+                                <strong>Phone </strong>  <p> {{appuser[0].phone}} </p>
+                                <strong>Extension </strong>  <p> {{appuser[0].extension}} </p>
+                            div(name=facebook ng-if="setvalue == 1")
+                                SOME FACEBOOK Page
+                            div(name=facebook ng-if="setvalue == 2")
+                                SOME Mail Box Page
+                            div(name=facebook ng-if="setvalue == 3")
+                                SOME Twitter Page
+                            div(name=facebook ng-if="setvalue == 4")
+                                SOME Search Page
+                            div(name=facebook ng-if="setvalue == 5")
+                                SOME Google Plus Page
+                            div(name=facebook ng-if="setvalue == 6")
+                                SOME Pivot Stats Page
+
+
             tr
             tr
                 td
                     div(class="sample-show-hide", ng-show="goBubbles", style="clear:both;")
-                        img(class="bub", src="/images/Twitter.jpg", alt="Twitter")
+                        img(class="bub", src="/images/Twitter.jpg", alt="Twitter" ng-click="setvalue=3")
                 td
                     div(class="sample-show-hide" ,style="clear:both;")
-                        img(class="bub2" ng-src="/images/Profile.jpg", alt="Profile Pic", ng-mouseover="showBubbles()", ng-mouseout="showBubbles()" ,ng-click="isclicked = !isclicked")
+                        img(class="bub2" ng-src="/images/Profile.jpg", alt="Profile Pic", ng-mouseover="showBubbles()", ng-mouseout="showBubbles()" ,ng-click="isclicked = !isclicked; setvalue=0")
                 td
                     div(class="sample-show-hide", ng-show="goBubbles" ,style="clear:both;")
-                        img(class = "bub", src="/images/Search.png", alt="Search")
+                        img(class = "bub", src="/images/Search.png", alt="Search", ng-click="setvalue=4")
+                td
             tr
             tr
                 td
                 td
                     div(class="sample-show-hide" ,ng-show="goBubbles", style="clear:both;")
-                        img(class="bub", src="/images/gplus.jpg", alt="Google Plus")
+                        img(class="bub", src="/images/gplus.jpg", alt="Google Plus", ng-click="setvalue=5")
                 td
                     div(class="sample-show-hide", ng-show="goBubbles", style="clear:both;")
-                        img(class="bub", src="/images/Letter-P-Icon.png", alt="Google Plus")
+                        img(class="bub", src="/images/Letter-P-Icon.png", alt="Pivot",ng-click="setvalue=6")
+                td
+
             tr
