@@ -3,7 +3,7 @@ var express = require('express'),
     logger = require('morgan'),
     bodyparser = require('body-parser'),
     mongoose = require('mongoose'),
-    model = require('./public/models/usermodel'),
+    model = require('./server/models/usermodel'),
     app = express();
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
