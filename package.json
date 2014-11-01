@@ -14,6 +14,8 @@
     "morgan": "~1.4.1",
     "stylus": "~0.49.2",
     "body-parser": "~1.9.1",
-    "mongoose": "~3.8.18"
+    "mongoose": "~3.8.18",
+    "karma": "~0.12.24",
+    "karma-jasmine": "~0.1.5"
   }
 }
