@@ -20,10 +20,10 @@ div(class='list-group', ng-controller='profileCtrl')
                     div 
                            div(style="width:300px ;height:100px")
                             div(name=profileInfo ng-if="setvalue == 0")
-                                <strong>Name </strong>  <p>{{appuser[0].name}}</p>
-                                <strong>Email </strong>  <p> {{appuser[0].email}} </p>
-                                <strong>Phone </strong>  <p> {{appuser[0].phone}} </p>
-                                <strong>Extension </strong>  <p> {{appuser[0].extension}} </p>
+                                <strong>Name </strong>  <p dbl-click-edit="appuser.name">{{appuser.name}}</p>
+                                <strong>Email </strong> <p zoomer> {{appuser.email}} </p>
+                                <strong>Phone </strong> <p zoomer> {{appuser.phone}} </p>
+                                <strong>Extension </strong> <p zoomer> {{appuser.extension}} </p>
                             div(name=facebook ng-if="setvalue == 1")
                                 SOME FACEBOOK Page
                             div(name=facebook ng-if="setvalue == 2")
@@ -47,7 +47,7 @@ div(class='list-group', ng-controller='profileCtrl')
                     div(class="sample-show-hide" ,style="clear:both;")
                         img(class="bub2" ng-src="/images/Profile.jpg", alt="Profile Pic", ng-mouseover="showBubbles()", ng-mouseout="showBubbles()" ,ng-click="isclicked = !isclicked; setvalue=0")
                 td
-                    div(class="sample-show-hide", ng-show="goBubbles" ,style="clear:both;")
+                    div(class="sample-show-hide", ng-show="goBubbles", style="clear:both;")
                         img(class = "bub", src="/images/Search.png", alt="Search", ng-click="setvalue=4")
                 td
             tr

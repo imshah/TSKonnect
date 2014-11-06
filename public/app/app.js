@@ -47,6 +47,49 @@ app.controller('mainCtrl', ['$scope','$http', 'currentUser',
 
 }]);
 
+app.directive('dblClickEdit', [function(){
+
+    var linker = function(scope, element, attrs){
+        element.on('dblclick', function(){
+            scope.editing = true;
+            scope.$apply();
+        })
+    };
+
+    return {
+        templateUrl: "../templates/dblClickEdit.tpl.html",
+        replace: true,
+        link: linker,
+        scope: {
+            model: "=dblClickEdit"
+        }
+
+    }
+}]);
+
+
+app.directive('zoomer',[function(){
+    var linker = function(scope,element, attrs){
+        element.hover(
+            function(){
+                $(this).css({
+                    'transition': 'all 0.75s',
+                    'transform': 'scale(1.1)'
+                });
+            },
+            function(){
+                $(this).css({
+                    'transition': 'all 0.75s',
+                    'transform': 'scale(1.0)'
+                });
+            }
+        );
+    };
+    return {
+        link: linker
+    }
+}]);
+
 app.controller('profileCtrl', ['$scope', '$http', 'currentUser',
     function($scope, $http, currentUser){
 
@@ -59,7 +102,7 @@ app.controller('profileCtrl', ['$scope', '$http', 'currentUser',
         ///TBD: move this service
     $http.get("/getUser/" + user.username).
         success(function (data, status, header, config) {
-            $scope.appuser = data;
+            $scope.appuser = data[0];
 
             console.log(data);
     });
@@ -87,4 +130,10 @@ app.controller('profileCtrl', ['$scope', '$http', 'currentUser',
         //$window.alert(url);
         //window.location.href = url;
     }
+
+
+    $scope.editField = function(element){
+        console.log(element);
+    };
+
 }]);
