@@ -29,23 +29,32 @@ app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
 
 app.value('currentUser', { data : {} });
 
+app.factory('GetUserService',['$http',function($http){
 
-app.controller('mainCtrl', ['$scope','$http', 'currentUser',
-    function($scope, $http, currentUser){
+    var currentUserId;
 
-   ///TDB: have to move this to service
-    $http.get('/getUser').
-        success(function (data, status, header, config) {
+    var getAllUsers = function(){
+        return $http.get('/users');
+    };
 
-            $scope.appuser = data;
-        });
+    var getUser = function(userid){
+        currentUserId = userid;
+        return $http.get('/users/' + userid);
+    };
 
-    $scope.loadProfile = function (user) {
-        currentUser.data = user;
-        //$state.go('profile', {username:user.username});
+    var getCurrentUser = function(){
+        return currentUserId;
     }
 
+    return({
+        getAllUsers: getAllUsers,
+        getUser: getUser,
+        getCurrentUser: getCurrentUser
+    });
+
+
 }]);
+
 
 app.directive('focusElem',[function(){
     var linker = function(scope, element, attrs){
@@ -86,7 +95,6 @@ app.directive('dblClickEdit', [function(){
     }
 }]);
 
-
 app.directive('zoomer',[function(){
     var linker = function(scope,element, attrs){
         element.hover(
@@ -109,22 +117,39 @@ app.directive('zoomer',[function(){
     }
 }]);
 
-app.controller('profileCtrl', ['$scope', '$http', 'currentUser',
-    function($scope, $http, currentUser){
+
+
+app.controller('mainCtrl', ['$scope', 'currentUser', 'GetUserService',
+    function($scope, currentUser, GetUserService){
+
+        GetUserService.getAllUsers()
+            .success(function (data, status, header, config) {
+
+                $scope.appuser = data;
+            });
+
+        $scope.loadProfile = function (user) {
+            currentUser.data = user;
+            //$state.go('profile', {username:user.username});
+        }
+
+    }]);
+
+
+app.controller('profileCtrl', ['$scope', 'currentUser', 'GetUserService',
+    function($scope, currentUser, GetUserService){
 
     $scope.setvalue=0;
     $scope.goBubbles=false;
     var user = currentUser.data;
-    //console.log(user.username);
 
+    GetUserService.getUser(user.username)
+        .success(function (data, status, header, config) {
 
-        ///TBD: move this service
-    $http.get("/getUser/" + user.username).
-        success(function (data, status, header, config) {
             $scope.appuser = data[0];
+            //console.log(data);
+        });
 
-            console.log(data);
-    });
 
 
 
@@ -133,7 +158,6 @@ app.controller('profileCtrl', ['$scope', '$http', 'currentUser',
     $scope.isclicked = false;
     $scope.showBubbles = function()
     {
-        //window.alert($scope.isclicked);
         if($scope.isclicked == false)
         {
             $scope.goBubbles = !$scope.goBubbles
@@ -142,17 +166,7 @@ app.controller('profileCtrl', ['$scope', '$http', 'currentUser',
         {
             $scope.goBubbles = true;
         }
-    }
-
-    // Image click behaviour
-    $scope.openNewURL = function(url){
-        //$window.alert(url);
-        //window.location.href = url;
-    }
-
-
-    $scope.editField = function(element){
-        console.log(element);
     };
+
 
 }]);
