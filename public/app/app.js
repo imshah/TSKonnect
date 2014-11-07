@@ -27,29 +27,24 @@ app.config(function($stateProvider,$urlRouterProvider,$locationProvider){
 });
 
 
-app.value('currentUser', { data : {} });
+//app.value('currentUser', { data : {} });
 
 app.factory('GetUserService',['$http',function($http){
 
-    var currentUserId;
+    var currentUser;
 
     var getAllUsers = function(){
         return $http.get('/users');
     };
 
     var getUser = function(userid){
-        currentUserId = userid;
+        currentUser = userid;
         return $http.get('/users/' + userid);
     };
 
-    var getCurrentUser = function(){
-        return currentUserId;
-    }
-
     return({
         getAllUsers: getAllUsers,
-        getUser: getUser,
-        getCurrentUser: getCurrentUser
+        getUser: getUser
     });
 
 
@@ -129,7 +124,8 @@ app.controller('mainCtrl', ['$scope', 'currentUser', 'GetUserService',
             });
 
         $scope.loadProfile = function (user) {
-            currentUser.data = user;
+            GetUserService.currentUser = user;
+            //currentUser.data = user;
             //$state.go('profile', {username:user.username});
         }
 
@@ -141,19 +137,20 @@ app.controller('profileCtrl', ['$scope', 'currentUser', 'GetUserService',
 
     $scope.setvalue=0;
     $scope.goBubbles=false;
-    var user = currentUser.data;
+    var user = GetUserService.currentUser; //currentUser.data;
 
     GetUserService.getUser(user.username)
         .success(function (data, status, header, config) {
 
             $scope.appuser = data[0];
+            //$scope.appuser = GetUserService.getCurrentUser();
             //console.log(data);
         });
 
 
 
 
-        //new code
+    //new code
     $scope.goBubbles = false;
     $scope.isclicked = false;
     $scope.showBubbles = function()
