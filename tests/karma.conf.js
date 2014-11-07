@@ -22,8 +22,9 @@ module.exports = function(config) {
         'public/vendor/angular-route/angular-route.js',
         'public/vendor/angular-ui-router/release/angular-ui-router.js',
         'public/app/app.js',
-        'models/*.js',
-        'tests/*-spec.js'
+        'tests/*-spec.js',
+        'test/unit/*.js',
+        'test/e2e/*.js'
         //'*spec.js'
         //'js/*.js'
     ],
