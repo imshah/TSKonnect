@@ -17,5 +17,10 @@
     "mongoose": "~3.8.18",
     "karma": "~0.12.24",
     "karma-jasmine": "~0.1.5"
+
+  },
+  "devDependencies": {
+    "karma-ie-launcher": "~0.1.5",
+    "karma-chrome-launcher": "~0.1.5"
   }
 }

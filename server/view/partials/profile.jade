@@ -21,9 +21,11 @@ div(class='list-group', ng-controller='profileCtrl')
                            div(style="width:300px ;height:100px")
                             div(name=profileInfo ng-if="setvalue == 0")
                                 <strong>Name </strong>  <p dbl-click-edit="appuser.name">{{appuser.name}}</p>
-                                <strong>Email </strong> <p zoomer> {{appuser.email}} </p>
-                                <strong>Phone </strong> <p zoomer> {{appuser.phone}} </p>
-                                <strong>Extension </strong> <p zoomer> {{appuser.extension}} </p>
+                                <strong>Email </strong> <p dbl-click-edit="appuser.email"> {{appuser.email}} </p>
+                                <strong>Phone </strong> <p dbl-click-edit="appuser.phone"> {{appuser.phone}} </p>
+                                <strong>Extension </strong> <p dbl-click-edit="appuser.extension"> {{appuser.extension}} </p>
+
+
                             div(name=facebook ng-if="setvalue == 1")
                                 SOME FACEBOOK Page
                             div(name=facebook ng-if="setvalue == 2")

@@ -47,13 +47,32 @@ app.controller('mainCtrl', ['$scope','$http', 'currentUser',
 
 }]);
 
+app.directive('focusElem',[function(){
+    var linker = function(scope, element, attrs){
+
+        element[0].focus();
+
+        element.on('blur', function () {
+            scope.isEditing = false;
+            //console.log('lost focus');
+            scope.$apply();
+
+        });
+
+    };
+
+    return {
+        link: linker
+    }
+}]);
+
 app.directive('dblClickEdit', [function(){
 
     var linker = function(scope, element, attrs){
         element.on('dblclick', function(){
-            scope.editing = true;
+            scope.isEditing = true;
             scope.$apply();
-        })
+        });
     };
 
     return {
@@ -79,7 +98,7 @@ app.directive('zoomer',[function(){
             },
             function(){
                 $(this).css({
-                    'transition': 'all 0.75s',
+                    'transition': 'all 0.15s',
                     'transform': 'scale(1.0)'
                 });
             }
